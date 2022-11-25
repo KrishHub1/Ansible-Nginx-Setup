@@ -1,0 +1,17 @@
+- name: Restart nginx
+  hosts: "{{ targets | default('localhost')}}"
+  become: yes
+  gather_facts: no
+  tasks:
+        
+    - name: stop nginx
+      service:
+        name: nginx
+        state: stopped
+      tags: stop-nginx
+
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+      tags: start-nginx
